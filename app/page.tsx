@@ -20,6 +20,7 @@ export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [activeAssistantTab, setActiveAssistantTab] = useState('situation')
   const [aiSuggestions, setAiSuggestions] = useState<any[]>([])
+  const [isAiLoading, setIsAiLoading] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -99,33 +100,39 @@ export default function Home() {
   }
 
   const handleRequestAISuggestion = (message: Message) => {
-    // 가상 AI 답변 생성
-    const suggestions = [
-      {
-        id: 'ai-1',
-        title: '친절한 안내',
-        content: `안녕하세요! 문의주신 내용 확인했습니다. \uD83D\uDE0A\n\n${message.content.includes('예약') ? '예약은 전화(02-1234-5678) 또는 카카오톡 채널로 가능합니다.' : ''}
+    setActiveAssistantTab('ai')
+    setIsAiLoading(true)
+    setAiSuggestions([])
+    
+    // 2초 후 가상 AI 답변 생성 (실제로는 API 호출)
+    setTimeout(() => {
+      const suggestions = [
+        {
+          id: 'ai-1',
+          title: '친절한 안내',
+          content: `안녕하세요! 문의주신 내용 확인했습니다. \uD83D\uDE0A\n\n${message.content.includes('예약') ? '예약은 전화(02-1234-5678) 또는 카카오톡 채널로 가능합니다.' : ''}
 ${message.content.includes('가격') ? '정확한 비용은 상담을 통해 안내드리겠습니다.' : ''}
 ${message.content.includes('시간') ? '운영시간은 평일 10:00-19:00, 토요일 10:00-17:00 입니다.' : ''}\n\n추가 문의사항이 있으신가요?`
-      },
-      {
-        id: 'ai-2',
-        title: '전문적인 안내',
-        content: `고객님 문의주신 내용 확인하였습니다.\n\n${message.content.includes('예약') ? '예약 시스템:\n- 온라인 예약: 24시간 가능\n- 전화 예약: 운영시간 내\n- 당일 예약은 어려울 수 있습니다.' : ''}
+        },
+        {
+          id: 'ai-2',
+          title: '전문적인 안내',
+          content: `고객님 문의주신 내용 확인하였습니다.\n\n${message.content.includes('예약') ? '예약 시스템:\n- 온라인 예약: 24시간 가능\n- 전화 예약: 운영시간 내\n- 당일 예약은 어려울 수 있습니다.' : ''}
 ${message.content.includes('가격') ? '시술 비용은 개인별 상태에 따라 달라질 수 있어 상담 후 정확한 견적을 제공해드립니다.' : ''}
 ${message.content.includes('시간') ? '저희 병원 운영시간은 다음과 같습니다:\n평일: 10:00-19:00\n토요일: 10:00-17:00\n일요일/공휴일: 휴무' : ''}`
-      },
-      {
-        id: 'ai-3',
-        title: '간결한 안내',
-        content: `네, 확인했습니다.\n\n${message.content.includes('예약') ? '• 예약: 02-1234-5678' : ''}
+        },
+        {
+          id: 'ai-3',
+          title: '간결한 안내',
+          content: `네, 확인했습니다.\n\n${message.content.includes('예약') ? '• 예약: 02-1234-5678' : ''}
 ${message.content.includes('가격') ? '• 비용: 상담 후 안내' : ''}
 ${message.content.includes('시간') ? '• 운영: 평일 10-19시, 토 10-17시' : ''}\n\n도와드릴 다른 사항이 있을까요?`
-      }
-    ]
-    
-    setAiSuggestions(suggestions)
-    setActiveAssistantTab('ai')
+        }
+      ]
+      
+      setAiSuggestions(suggestions)
+      setIsAiLoading(false)
+    }, 2000)
   }
 
   const handleSaveMemo = (customerId: string, memo: string) => {
@@ -175,6 +182,7 @@ ${message.content.includes('시간') ? '• 운영: 평일 10-19시, 토 10-17�
           activeTab={activeAssistantTab}
           onTabChange={setActiveAssistantTab}
           aiSuggestions={aiSuggestions}
+          isAiLoading={isAiLoading}
         />
       </div>
     </div>

@@ -7,7 +7,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { cn } from '@/lib/utils'
 import { Customer, Message, MessageStatus } from '@/types'
 import { PlatformIcon } from '@/components/platform-icons'
-import { Send, Paperclip, ChevronDown, Sparkles, StickyNote } from 'lucide-react'
+import { Send, Paperclip, ChevronDown, Sparkles, StickyNote, Edit2 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 
 interface ChatWindowProps {
@@ -25,7 +25,9 @@ export function ChatWindow({ customer, messages, onSendMessage, onCompleteChat, 
   const [selectedMessageId, setSelectedMessageId] = useState<string | null>(null)
   const [customPrompt, setCustomPrompt] = useState('')
   const [showMemo, setShowMemo] = useState(false)
+  const [isEditingMemo, setIsEditingMemo] = useState(false)
   const [memo, setMemo] = useState('')
+  const [tempMemo, setTempMemo] = useState('')
   const scrollAreaViewportRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   
@@ -62,6 +64,8 @@ export function ChatWindow({ customer, messages, onSendMessage, onCompleteChat, 
     } else {
       setMemo('')
     }
+    setShowMemo(false)
+    setIsEditingMemo(false)
   }, [customer])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -183,35 +187,67 @@ export function ChatWindow({ customer, messages, onSendMessage, onCompleteChat, 
         </div>
         {showMemo && (
           <div className="mt-3 p-3 bg-yellow-50 rounded-lg">
-            <Textarea
-              value={memo}
-              onChange={(e) => setMemo(e.target.value)}
-              placeholder="고객에 대한 메모를 입력하세요..."
-              className="min-h-[80px] resize-none bg-transparent border-0 p-0 focus-visible:ring-0 text-sm"
-            />
-            <div className="flex justify-end mt-2 gap-2">
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={() => {
-                  setShowMemo(false)
-                  setMemo(customer?.memo || '')
-                }}
-              >
-                취소
-              </Button>
-              <Button
-                size="sm"
-                onClick={() => {
-                  if (customer && onSaveMemo) {
-                    onSaveMemo(customer.id, memo)
-                  }
-                  setShowMemo(false)
-                }}
-              >
-                저장
-              </Button>
-            </div>
+            {isEditingMemo ? (
+              <>
+                <Textarea
+                  value={tempMemo}
+                  onChange={(e) => setTempMemo(e.target.value)}
+                  placeholder="고객에 대한 메모를 입력하세요..."
+                  className="min-h-[80px] resize-none bg-transparent border-0 p-0 focus-visible:ring-0 text-sm"
+                  autoFocus
+                />
+                <div className="flex justify-end mt-2 gap-2">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => {
+                      setIsEditingMemo(false)
+                      setTempMemo(memo)
+                    }}
+                  >
+                    취소
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      if (customer && onSaveMemo) {
+                        onSaveMemo(customer.id, tempMemo)
+                        setMemo(tempMemo)
+                      }
+                      setIsEditingMemo(false)
+                    }}
+                  >
+                    저장
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                {memo ? (
+                  <div className="text-sm text-gray-700 whitespace-pre-wrap">
+                    {memo}
+                  </div>
+                ) : (
+                  <div className="text-sm text-gray-400 italic">
+                    메모가 없습니다.
+                  </div>
+                )}
+                <div className="flex justify-end mt-2">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => {
+                      setTempMemo(memo)
+                      setIsEditingMemo(true)
+                    }}
+                    className="gap-1"
+                  >
+                    <Edit2 className="h-3 w-3" />
+                    수정
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>
