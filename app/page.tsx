@@ -12,8 +12,6 @@ import {
   mockQuickReplies,
   mockManuals,
 } from '@/lib/mock-data'
-import { Moon, Sun, Bell } from 'lucide-react'
-import { useTheme } from 'next-themes'
 
 export default function Home() {
   const [customers, setCustomers] = useState<Customer[]>(mockCustomers)
@@ -22,7 +20,6 @@ export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [activeAssistantTab, setActiveAssistantTab] = useState('situation')
   const [aiSuggestions, setAiSuggestions] = useState<any[]>([])
-  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
@@ -151,22 +148,6 @@ ${message.content.includes('시간') ? '• 운영: 평일 10-19시, 토 10-17�
           <span className="text-sm text-muted-foreground">
             통합 메신저 상담 관리 시스템
           </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon">
-            <Bell className="h-5 w-5" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          >
-            {theme === 'dark' ? (
-              <Sun className="h-5 w-5" />
-            ) : (
-              <Moon className="h-5 w-5" />
-            )}
-          </Button>
         </div>
       </header>
 

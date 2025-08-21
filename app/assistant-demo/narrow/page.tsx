@@ -87,7 +87,7 @@ export default function AssistantNarrowPage() {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden">
         <div className="px-4 pt-3 pb-2">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="ai" className="text-xs px-1 text-violet-600 data-[state=active]:text-violet-600 data-[state=active]:bg-violet-50 dark:data-[state=active]:bg-violet-950/30">
+            <TabsTrigger value="ai" className="text-xs px-1 text-violet-600 data-[state=active]:text-violet-600 data-[state=active]:bg-violet-50">
               AI
             </TabsTrigger>
             <TabsTrigger value="situation" className="text-xs px-1">기본</TabsTrigger>
@@ -471,9 +471,9 @@ export default function AssistantNarrowPage() {
                   return (
                     <Card key={doctor.id} className={cn(
                       "border",
-                      procedure.proficiency === 'expert' && "border-blue-200 bg-blue-50/50 dark:border-blue-900 dark:bg-blue-950/20",
-                      procedure.proficiency === 'available' && "border-green-200 bg-green-50/50 dark:border-green-900 dark:bg-green-950/20",
-                      procedure.proficiency === 'unavailable' && "border-red-200 bg-red-50/50 dark:border-red-900 dark:bg-red-950/20"
+                      procedure.proficiency === 'expert' && "border-blue-200 bg-blue-50/50",
+                      procedure.proficiency === 'available' && "border-green-200 bg-green-50/50",
+                      procedure.proficiency === 'unavailable' && "border-red-200 bg-red-50/50"
                     )}>
                       <CardContent className="p-3">
                         <div className="flex items-center justify-between">

@@ -115,7 +115,7 @@ export function AssistantPanelNew({
       <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden">
         <div className="px-4 pt-3 pb-2">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="ai" className="text-xs px-1 text-violet-600 data-[state=active]:text-violet-600 data-[state=active]:bg-violet-50 dark:data-[state=active]:bg-violet-950/30">
+            <TabsTrigger value="ai" className="text-xs px-1 text-violet-600 data-[state=active]:text-violet-600 data-[state=active]:bg-violet-50">
               <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
                 <path fillRule="evenodd" d="M5 4a.75.75 0 0 1 .738.616l.252 1.388A1.25 1.25 0 0 0 6.996 7.01l1.388.252a.75.75 0 0 1 0 1.476l-1.388.252A1.25 1.25 0 0 0 5.99 9.996l-.252 1.388a.75.75 0 0 1-1.476 0L4.01 9.996A1.25 1.25 0 0 0 3.004 8.99l-1.388-.252a.75.75 0 0 1 0-1.476l1.388-.252A1.25 1.25 0 0 0 4.01 6.004l.252-1.388A.75.75 0 0 1 5 4ZM12 1a.75.75 0 0 1 .721.544l.195.682c.118.415.443.74.858.858l.682.195a.75.75 0 0 1 0 1.442l-.682.195a1.25 1.25 0 0 0-.858.858l-.195.682a.75.75 0 0 1-1.442 0l-.195-.682a1.25 1.25 0 0 0-.858-.858l-.682-.195a.75.75 0 0 1 0-1.442l.682-.195a1.25 1.25 0 0 0 .858-.858l.195-.682A.75.75 0 0 1 12 1ZM10 11a.75.75 0 0 1 .728.568.968.968 0 0 0 .704.704.75.75 0 0 1 0 1.456.968.968 0 0 0-.704.704.75.75 0 0 1-1.456 0 .968.968 0 0 0-.704-.704.75.75 0 0 1 0-1.456.968.968 0 0 0 .704-.704A.75.75 0 0 1 10 11Z" clipRule="evenodd"/>
               </svg>
@@ -511,9 +511,9 @@ export function AssistantPanelNew({
                   return (
                     <Card key={doctor.id} className={cn(
                       "border",
-                      procedure.proficiency === 'expert' && "border-blue-200 bg-blue-50/50 dark:border-blue-900 dark:bg-blue-950/20",
-                      procedure.proficiency === 'available' && "border-green-200 bg-green-50/50 dark:border-green-900 dark:bg-green-950/20",
-                      procedure.proficiency === 'unavailable' && "border-red-200 bg-red-50/50 dark:border-red-900 dark:bg-red-950/20"
+                      procedure.proficiency === 'expert' && "border-blue-200 bg-blue-50/50",
+                      procedure.proficiency === 'available' && "border-green-200 bg-green-50/50",
+                      procedure.proficiency === 'unavailable' && "border-red-200 bg-red-50/50"
                     )}>
                       <CardContent className="p-3">
                         <div className="flex items-center justify-between">

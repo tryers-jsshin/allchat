@@ -182,7 +182,7 @@ export function ChatWindow({ customer, messages, onSendMessage, onCompleteChat, 
           </div>
         </div>
         {showMemo && (
-          <div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg">
+          <div className="mt-3 p-3 bg-yellow-50 rounded-lg">
             <Textarea
               value={memo}
               onChange={(e) => setMemo(e.target.value)}
@@ -216,7 +216,7 @@ export function ChatWindow({ customer, messages, onSendMessage, onCompleteChat, 
         )}
       </div>
 
-      <div className="flex-1 overflow-hidden bg-gray-50/40 dark:bg-gray-950/20">
+      <div className="flex-1 overflow-hidden bg-gray-50/40">
         <div className="h-full overflow-y-auto p-4" ref={scrollAreaViewportRef}>
           {messages.map((message, index) => {
             const currentTime = formatTime(message.timestamp)
