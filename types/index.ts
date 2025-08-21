@@ -11,11 +11,6 @@ export interface Customer {
   lastMessageTime: Date
   status: MessageStatus
   unreadCount?: number
-  memo?: string
-  tags?: string[]
-  phone?: string
-  email?: string
-  registeredAt?: Date
 }
 
 export interface Message {

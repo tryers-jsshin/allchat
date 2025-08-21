@@ -135,15 +135,6 @@ ${message.content.includes('시간') ? '• 운영: 평일 10-19시, 토 10-17�
     }, 2000)
   }
 
-  const handleSaveMemo = (customerId: string, memo: string) => {
-    setCustomers(prev =>
-      prev.map(customer =>
-        customer.id === customerId
-          ? { ...customer, memo }
-          : customer
-      )
-    )
-  }
 
   if (!mounted) return null
 
@@ -174,7 +165,6 @@ ${message.content.includes('시간') ? '• 운영: 평일 10-19시, 토 10-17�
           onCompleteChat={handleCompleteChat}
           onStatusChange={handleStatusChange}
           onRequestAISuggestion={handleRequestAISuggestion}
-          onSaveMemo={handleSaveMemo}
         />
 
         <AssistantPanelNew
