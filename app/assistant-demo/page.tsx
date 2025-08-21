@@ -311,7 +311,7 @@ export default function AssistantDemoPage() {
                             className={cn(
                               "flex items-center gap-2 p-2 rounded-lg border text-sm",
                               proc.proficiency === 'expert' && "bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800",
-                              proc.proficiency === 'normal' && "bg-yellow-50 border-yellow-200 dark:bg-yellow-950 dark:border-yellow-800",
+                              proc.proficiency === 'available' && "bg-yellow-50 border-yellow-200 dark:bg-yellow-950 dark:border-yellow-800",
                               proc.proficiency === 'unavailable' && "bg-gray-50 border-gray-200 dark:bg-gray-950 dark:border-gray-800"
                             )}
                           >

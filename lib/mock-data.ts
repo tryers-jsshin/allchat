@@ -363,6 +363,8 @@ export const mockManuals: Manual[] = [
   },
 ]
 
+import { Channel } from '@/types'
+
 export const getChannelColor = (channel: Channel): string => {
   const colors: Record<Channel, string> = {
     kakao: 'bg-yellow-500',
